@@ -23,69 +23,101 @@ type NavItem = {
   subItems?: { name: string; path: string }[];
 };
 
-const navItems: NavItem[] = [
-  {
-    icon: "solar:widget-5-outline",
-    name: "Dashboard",
-    path: "",
-  },
-  {
-    icon: "solar:calendar-linear",
-    name: "Calendar",
-    path: "calendar",
-  },
-  {
-    icon: "solar:user-circle-linear",
-    name: "User Profile",
-    path: "profile",
-  },
-  {
-    name: "Forms",
-    icon: "solar:checklist-minimalistic-linear",
-    subItems: [{ name: "Form Elements", path: "form-elements" }],
-  },
-  {
-    name: "Tables",
-    icon: "solar:server-square-linear",
-    subItems: [{ name: "Basic Tables", path: "basic-tables" }],
-  },
-  {
-    name: "Pages",
-    icon: "solar:file-text-linear",
-    subItems: [
-      { name: "Blank Page", path: "blank" },
-      { name: "404 Error", path: "error-404" },
-    ],
-  },
-];
+type SidebarSection = {
+  title: string;
+  items: NavItem[];
+};
 
-const othersItems: NavItem[] = [
+const sidebarConfig: SidebarSection[] = [
   {
-    icon: "solar:chart-2-linear",
-    name: "Charts",
-    subItems: [
-      { name: "Line Chart", path: "line-chart" },
-      { name: "Bar Chart", path: "bar-chart" },
+    title: "Menu",
+    items: [
+      {
+        icon: "solar:widget-5-outline",
+        name: "Dashboard",
+        path: "",
+      },
+      {
+        icon: "solar:calendar-linear",
+        name: "Calendar",
+        path: "calendar",
+      },
+      {
+        icon: "solar:user-circle-linear",
+        name: "User Profile",
+        path: "profile",
+      },
+      {
+        name: "Forms",
+        icon: "solar:checklist-minimalistic-linear",
+        subItems: [{ name: "Form Elements", path: "form-elements" }],
+      },
+      {
+        name: "Tables",
+        icon: "solar:server-square-linear",
+        subItems: [{ name: "Basic Tables", path: "basic-tables" }],
+      },
+      {
+        name: "Pages",
+        icon: "solar:file-text-linear",
+        subItems: [
+          { name: "Blank Page", path: "blank" },
+          { name: "404 Error", path: "error-404" },
+        ],
+      },
     ],
   },
   {
-    icon: "solar:box-linear",
-    name: "UI Elements",
-    subItems: [
-      { name: "Alerts", path: "alerts" },
-      { name: "Avatar", path: "avatars" },
-      { name: "Badge", path: "badge" },
-      { name: "Buttons", path: "buttons" },
-      { name: "Images", path: "images" },
-      { name: "Videos", path: "videos" },
+    title: "Others",
+    items: [
+      {
+        icon: "solar:chart-2-linear",
+        name: "Charts",
+        subItems: [
+          { name: "Line Chart", path: "line-chart" },
+          { name: "Bar Chart", path: "bar-chart" },
+        ],
+      },
+      {
+        icon: "solar:box-linear",
+        name: "UI Elements",
+        subItems: [
+          { name: "Alerts", path: "alerts" },
+          { name: "Avatar", path: "avatars" },
+          { name: "Badge", path: "badge" },
+          { name: "Buttons", path: "buttons" },
+          { name: "Images", path: "images" },
+          { name: "Videos", path: "videos" },
+        ],
+      },
+      {
+        icon: "solar:login-2-linear",
+        name: "Authentication",
+        subItems: [
+          { name: "Sign In", path: "signin" },
+          { name: "Sign Up", path: "signup" },
+        ],
+      },
     ],
   },
   {
-    icon: "solar:login-2-linear",
-    name: "Authentication",
-    subItems: [
-      { name: "Sign In", path: "signin" },
-      { name: "Sign Up", path: "signup" },
+    title: "Support",
+    items: [
+      {
+        icon: "solar:help-linear",
+        name: "Help Center",
+        path: "help-center",
+      },
+      {
+        icon: "solar:chat-round-dots-linear",
+        name: "Messages",
+        path: "messages",
+      },
+      {
+        icon: "solar:ticket-linear",
+        name: "Tickets",
+        path: "tickets",
+      },
     ],
   },
 ];
@@ -236,8 +268,8 @@ function AdminSidebar() {
     );
   };
 
-  const renderSection = (title: string, items: NavItem[]) => (
-    <div className="mb-6 w-full">
+  const renderSection = (section: SidebarSection) => (
+    <div className="mb-6 w-full" key={section.title}>
       <div
         className={`mb-2 px-4 flex items-center h-6 ${
           !isFullSidebar
@@ -247,7 +279,7 @@ function AdminSidebar() {
       >
         {isFullSidebar ? (
           <span className="text-xs font-bold uppercase tracking-wider">
-            {title}
+            {section.title}
           </span>
         ) : (
           <Icon icon="solar:menu-dots-bold" className="text-xl" />
@@ -255,8 +287,8 @@ function AdminSidebar() {
       </div>
 
       <ul className="flex flex-col gap-0.5 w-full">
-        {items.map((nav, idx) => (
-          <div key={`${title}-${idx}`} className="w-full">
+        {section.items.map((nav, idx) => (
+          <div key={`${section.title}-${idx}`} className="w-full">
             {nav.subItems ? renderGroupItem(nav) : renderSingleItem(nav)}
           </div>
         ))}
@@ -288,8 +320,7 @@ function AdminSidebar() {
 
       <ScrollShadow className="h-[calc(100vh-64px)] pb-10" hideScrollBar>
         <div className="py-6 px-3">
-          {renderSection("Menu", navItems)}
-          {renderSection("Others", othersItems)}
+          {sidebarConfig.map((section) => renderSection(section))}
         </div>
       </ScrollShadow>
     </aside>
