@@ -13,6 +13,7 @@ import {
   User,
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
@@ -173,6 +174,8 @@ function OfferingDetailsPage() {
 
                 <div className="space-y-3">
                   <Button
+                    as={Link}
+                    href={`/offerings/${offeringData.slug}/checkout`}
                     fullWidth
                     variant="flat"
                     color="success"
