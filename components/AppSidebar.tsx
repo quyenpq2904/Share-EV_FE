@@ -66,6 +66,12 @@ const sidebarConfig = [
         href: "/me/schedules",
         icon: "solar:clock-circle-outline",
       },
+      {
+        key: "votings",
+        label: "Votings Center",
+        href: "/me/votings",
+        icon: "solar:users-group-rounded-linear",
+      },
     ],
   },
   {

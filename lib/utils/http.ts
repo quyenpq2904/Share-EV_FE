@@ -11,7 +11,8 @@ import {
 } from "./localStorage";
 import authApi from "@/apis/auth/auth";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || "https://l32wjdbb-3001.asse.devtunnels.ms";
 
 class Http {
   instance: AxiosInstance;
