@@ -238,9 +238,7 @@ export default function TicketsPage() {
                 <DropdownMenu>
                   <DropdownItem
                     key="details"
-                    onPress={
-                      () => router.push(`/admin/support/ticket-detail`) // Sửa lại link cho đúng trang detail đã tạo
-                    }
+                    onPress={() => router.push(`/admin/tickets/323534`)}
                   >
                     View Details
                   </DropdownItem>
