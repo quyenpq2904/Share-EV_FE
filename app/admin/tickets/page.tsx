@@ -42,21 +42,25 @@ const stats = [
   },
 ];
 
+// ✅ 1. Cập nhật Columns: Thêm CATEGORY
 const columns: Column[] = [
   { name: "TICKET ID", uid: "id", sortable: true },
   { name: "REQUESTED BY", uid: "requestedBy", sortable: true },
   { name: "SUBJECT", uid: "subject" },
+  { name: "CATEGORY", uid: "category", sortable: true }, // New Column
   { name: "CREATE DATE", uid: "date", sortable: true },
   { name: "STATUS", uid: "status", sortable: true },
   { name: "ACTIONS", uid: "actions", align: "center" },
 ];
 
+// ✅ 2. Cập nhật Data: Thêm category
 const users = [
   {
     id: "#323534",
     name: "Lindsey Curtis",
     email: "demoemail@gmail.com",
     subject: "Issue with Dashboard Login Access",
+    category: "Technical Issue", // New field
     date: "12 Feb, 2027",
     status: "Solved",
   },
@@ -65,6 +69,7 @@ const users = [
     name: "Kaiya George",
     email: "demoemail@gmail.com",
     subject: "Billing Information Not Updating Properly",
+    category: "Billing & Refund",
     date: "13 Mar, 2027",
     status: "Pending",
   },
@@ -73,6 +78,7 @@ const users = [
     name: "Zain Geidt",
     email: "demoemail@gmail.com",
     subject: "Bug Found in Dark Mode Layout",
+    category: "Technical Issue",
     date: "19 Mar, 2027",
     status: "Pending",
   },
@@ -81,6 +87,7 @@ const users = [
     name: "Abram Schleifer",
     email: "demoemail@gmail.com",
     subject: "Request to Add New Integration Feature",
+    category: "Feature Request",
     date: "25 Apr, 2027",
     status: "Solved",
   },
@@ -89,6 +96,7 @@ const users = [
     name: "Mia Chen",
     email: "mia.chen@email.com",
     subject: "Unable to Reset Password",
+    category: "Account Access",
     date: "28 Apr, 2027",
     status: "Pending",
   },
@@ -97,6 +105,7 @@ const users = [
     name: "John Doe",
     email: "john.doe@email.com",
     subject: "Feature Request: Dark Mode",
+    category: "Feature Request",
     date: "30 Apr, 2027",
     status: "Solved",
   },
@@ -105,6 +114,7 @@ const users = [
     name: "Jane Smith",
     email: "jane.smith@email.com",
     subject: "Error 500 on Dashboard",
+    category: "Technical Issue",
     date: "01 May, 2027",
     status: "Pending",
   },
@@ -147,6 +157,8 @@ export default function TicketsPage() {
   }, [page, filteredItems]);
 
   const totalPages = Math.ceil(filteredItems.length / rowsPerPage);
+
+  // ✅ 3. Cập nhật Render Cell: Xử lý cột Category
   const renderCell = useCallback(
     (user: any, columnKey: React.Key) => {
       const cellValue = user[columnKey as keyof typeof user];
@@ -177,6 +189,21 @@ export default function TicketsPage() {
             <p className="text-small font-medium text-default-700 truncate max-w-[300px]">
               {cellValue}
             </p>
+          );
+
+        // --- NEW CASE FOR CATEGORY ---
+        case "category":
+          return (
+            <Chip
+              variant="dot"
+              size="sm"
+              classNames={{
+                base: "border-none bg-transparent",
+                content: "font-medium text-default-600",
+              }}
+            >
+              {cellValue}
+            </Chip>
           );
 
         case "date":
@@ -211,8 +238,8 @@ export default function TicketsPage() {
                 <DropdownMenu>
                   <DropdownItem
                     key="details"
-                    onPress={() =>
-                      router.push(`/admin/tickets/${user.id.replace("#", "")}`)
+                    onPress={
+                      () => router.push(`/admin/support/ticket-detail`) // Sửa lại link cho đúng trang detail đã tạo
                     }
                   >
                     View Details
@@ -253,7 +280,6 @@ export default function TicketsPage() {
 
       <div className="flex justify-between items-center">
         <div className="flex flex-col gap-4 ">
-          {/* Title & Description bên trong Table header để thẳng hàng */}
           <div className="flex flex-col gap-1">
             <h2 className="text-xl font-bold text-default-900">
               Support Tickets
