@@ -6,179 +6,202 @@ import {
   Input,
   Select,
   SelectItem,
-  RadioGroup,
-  Radio,
-  Textarea,
   Image,
+  Card,
+  CardBody,
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
 
 function AddVehiclePage() {
   return (
-    <div className="flex justify-center">
-      <div className="w-full space-y-8">
-        <div>
-          <h1 className="text-3xl font-bold mb-2">
-            Add Your Vehicle to the Platform
-          </h1>
-          <p className="text-default-600">
-            Start by entering the essential details of your electric vehicle.
-          </p>
-        </div>
-        <div className="border border-default-400 rounded-2xl p-6 md:p-10 space-y-8">
-          <section className="flex flex-col space-y-6">
-            <h2 className="text-xl font-bold">Vehicle Details</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Select
-                label="Make"
-                placeholder="Select Make"
-                labelPlacement="outside"
-              >
-                <SelectItem key="tesla">Tesla</SelectItem>
-                <SelectItem key="rivian">Rivian</SelectItem>
-                <SelectItem key="ford">Ford</SelectItem>
-              </Select>
+    <div className="w-full space-y-8">
+      <div>
+        <h1 className="text-3xl font-bold mb-2">
+          Add Your Vehicle to the Platform
+        </h1>
+        <p className="text-default-600">
+          Start by entering the essential details of your electric vehicle.
+        </p>
+      </div>
 
-              <Select
-                label="Model"
-                placeholder="Select Model"
-                labelPlacement="outside"
-              >
-                <SelectItem key="modely">Model Y</SelectItem>
-                <SelectItem key="r1t">R1T</SelectItem>
-                <SelectItem key="mach-e">Mustang Mach-E</SelectItem>
-              </Select>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Select
-                label="Year"
-                placeholder="Select Year"
-                labelPlacement="outside"
-              >
-                <SelectItem key="2024">2024</SelectItem>
-                <SelectItem key="2023">2023</SelectItem>
-                <SelectItem key="2022">2022</SelectItem>
-              </Select>
-
-              <Input
-                label="Trim / Variant"
-                placeholder="e.g., Long Range"
-                labelPlacement="outside"
-              />
-            </div>
-
-            <div>
-              <Input
-                label="VIN (Vehicle Identification Number)"
-                placeholder="Enter 17-digit VIN"
-                labelPlacement="outside"
-                endContent={
-                  <Icon
-                    icon="solar:info-circle-linear"
-                    className="text-default-500 cursor-help"
-                  />
-                }
-              />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Select
-                label="Body Type"
-                placeholder="Select Body Type"
-                labelPlacement="outside"
-              >
-                <SelectItem key="suv">SUV</SelectItem>
-                <SelectItem key="sedan">Sedan</SelectItem>
-                <SelectItem key="truck">Truck</SelectItem>
-              </Select>
-
-              <Input
-                label="Current Mileage"
-                placeholder="e.g., 15000"
-                labelPlacement="outside"
-                type="number"
-              />
-            </div>
-            <div>
-              <label className="text-sm mb-3 block">Condition</label>
-              <RadioGroup
-                orientation="horizontal"
-                defaultValue="new"
-                classNames={{ wrapper: "gap-6" }}
-              >
-                <Radio value="new" color="success">
-                  New
-                </Radio>
-                <Radio value="like-new" color="success">
-                  Like New
-                </Radio>
-                <Radio value="excellent" color="success">
-                  Excellent
-                </Radio>
-              </RadioGroup>
-            </div>
-          </section>
-
-          <section className="space-y-4">
-            <h2 className="text-xl font-bold">Photos & Media</h2>
-
-            <div className="border-2 border-dashed border-default-500 rounded-xl p-10 flex flex-col items-center justify-center gap-3 cursor-pointer">
-              <div className="w-12 h-12 bg-default-300 rounded-lg flex items-center justify-center">
-                <Icon
-                  icon="solar:upload-linear"
-                  className="text-2xl text-default-700"
+      <Card radius="lg">
+        <CardBody className="p-6 md:p-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            <div className="lg:col-span-7 space-y-6">
+              <h2 className="text-xl font-bold">Vehicle Details</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Input
+                  label="Make"
+                  placeholder="e.g., Ferrari"
+                  labelPlacement="outside"
+                  radius="sm"
+                />
+                <Input
+                  label="Model"
+                  placeholder="e.g., 488 Pista"
+                  labelPlacement="outside"
+                  radius="sm"
                 />
               </div>
-              <div className="text-center">
-                <p className="text-sm text-default-600">
-                  <span className="text-[#00E396] font-bold hover:underline">
-                    Upload a file
-                  </span>{" "}
-                  or drag and drop
-                </p>
-                <p className="text-xs text-default-500 mt-1">
-                  Add at least 5 photos. PNG, JPG, GIF up to 10MB
-                </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Input
+                  label="Year"
+                  placeholder="e.g., 2023"
+                  labelPlacement="outside"
+                  radius="sm"
+                />
+                <Input
+                  label="VIN"
+                  placeholder="Vehicle Identification Number"
+                  labelPlacement="outside"
+                  radius="sm"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Input
+                  label="Mileage"
+                  placeholder="e.g., 5,000"
+                  labelPlacement="outside"
+                  radius="sm"
+                />
+                <Input
+                  label="Exterior Color"
+                  placeholder="e.g., Rosso Corsa"
+                  labelPlacement="outside"
+                  radius="sm"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Input
+                  label="Mileage"
+                  placeholder="e.g., 5,000"
+                  labelPlacement="outside"
+                  radius="sm"
+                />
+                <Input
+                  label="Exterior Color"
+                  placeholder="e.g., Rosso Corsa"
+                  labelPlacement="outside"
+                  radius="sm"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Input
+                  label="Location"
+                  placeholder="e.g., Miami, FL"
+                  labelPlacement="outside"
+                  radius="sm"
+                />
+                <Input
+                  label="Listing Price ($)"
+                  placeholder="e.g., 350,000"
+                  labelPlacement="outside"
+                  radius="sm"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Input
+                  label="Engine"
+                  placeholder="e.g., 3.9L Twin-Turbo V8"
+                  labelPlacement="outside"
+                  radius="sm"
+                />
+                <Select
+                  label="Transmission"
+                  placeholder="Select"
+                  labelPlacement="outside"
+                  defaultSelectedKeys={["automatic"]}
+                  radius="sm"
+                >
+                  <SelectItem key="automatic">Automatic</SelectItem>
+                  <SelectItem key="manual">Manual</SelectItem>
+                </Select>
               </div>
             </div>
 
-            <div className="flex gap-4 overflow-x-auto pb-2">
-              <div className="w-24 h-24 rounded-xl overflow-hidden shrink-0 border border-default-100/10">
-                <Image
-                  src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=300&auto=format&fit=crop"
-                  alt="Car Front"
-                  className="w-full h-full object-cover"
-                  removeWrapper
-                />
-              </div>
-              <div className="w-24 h-24 rounded-xl overflow-hidden shrink-0 border border-default-100/10">
-                <Image
-                  src="https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=300&auto=format&fit=crop"
-                  alt="Car Side"
-                  className="w-full h-full object-cover"
-                  removeWrapper
-                />
+            {/* --- RIGHT COLUMN: UPLOAD PHOTOS (Span 5) --- */}
+            <div className="lg:col-span-5 flex flex-col h-full">
+              <h2 className="text-xl font-bold mb-6">Upload Vehicle Photos</h2>
+
+              <div className="flex-1 flex flex-col gap-4">
+                {/* Main Upload Box - Expanded height to match layout */}
+                <div className="flex-1 border-2 border-dashed border-default-300 bg-default-50 rounded-xl flex flex-col items-center justify-center gap-4 cursor-pointer hover:bg-default-100 transition-colors min-h-[300px]">
+                  <div className="w-12 h-12 bg-default-200 rounded-lg flex items-center justify-center text-default-600">
+                    <Icon icon="solar:upload-linear" className="text-2xl" />
+                  </div>
+
+                  <div className="text-center space-y-2 px-4">
+                    <p className="text-base font-semibold text-default-900">
+                      Drag & drop files here
+                    </p>
+                    <p className="text-sm text-default-500">
+                      At least 5 high-quality photos are required.
+                    </p>
+                  </div>
+
+                  <Button
+                    size="sm"
+                    className="bg-default-200 text-default-700 font-medium px-6 mt-2"
+                  >
+                    Browse Files
+                  </Button>
+                </div>
+
+                {/* Thumbnails */}
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="aspect-[4/3] rounded-lg overflow-hidden relative border border-default-200">
+                    <Image
+                      src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=300&auto=format&fit=crop"
+                      alt="Car Front"
+                      className="w-full h-full object-cover"
+                      removeWrapper
+                      radius="none"
+                    />
+                  </div>
+                  <div className="aspect-[4/3] rounded-lg overflow-hidden relative border border-default-200">
+                    <Image
+                      src="https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=300&auto=format&fit=crop"
+                      alt="Car Side"
+                      className="w-full h-full object-cover"
+                      removeWrapper
+                      radius="none"
+                    />
+                  </div>
+                  <div className="aspect-[4/3] rounded-lg overflow-hidden relative border border-default-200">
+                    <Image
+                      src="https://images.unsplash.com/photo-1503376763036-066120622c74?q=80&w=300&auto=format&fit=crop"
+                      alt="Interior"
+                      className="w-full h-full object-cover"
+                      removeWrapper
+                      radius="none"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-          </section>
-
-          <section className="space-y-4">
-            <h2 className="text-xl font-bold">Description</h2>
-            <Textarea
-              placeholder="Add any personal comments or extra details about the vehicle's history and features."
-              minRows={4}
-              variant="bordered"
-            />
-          </section>
-
-          <div className="flex justify-end items-center gap-4 pt-4">
-            <Button variant="light" className="font-medium">
-              Save as Draft
-            </Button>
-            <Button className="font-bold" color="success" variant="shadow">
-              Save and Continue
-            </Button>
           </div>
+        </CardBody>
+      </Card>
+
+      <div className="bg-warning-100 border border-yellow-200 rounded-xl p-4 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p className="text-sm text-default-700 text-center md:text-left">
+          Our team will review your submission within 48 hours before it goes
+          live.
+        </p>
+        <div className="flex items-center gap-3">
+          <Button
+            className="font-bold"
+            color="warning"
+            variant="shadow"
+            radius="sm"
+          >
+            Submit for Review
+          </Button>
         </div>
       </div>
     </div>
