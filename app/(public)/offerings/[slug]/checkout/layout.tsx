@@ -25,7 +25,7 @@ function CheckoutLayoutContent({ children }: { children: React.ReactNode }) {
   const slug = params.slug as string;
 
   return (
-    <>
+    <div className="max-w-7xl mx-auto mt-5 mb-10 px-6">
       <AppBreadcrumb
         dynamicRoutes={{
           [slug]: orderData.item.name,
@@ -44,7 +44,7 @@ function CheckoutLayoutContent({ children }: { children: React.ReactNode }) {
         />
       </div>
       {children}
-    </>
+    </div>
   );
 }
 

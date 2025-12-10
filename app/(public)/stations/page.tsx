@@ -174,7 +174,7 @@ export default function StationsPage() {
   });
 
   return (
-    <div className="w-full max-w-7xl mx-auto mt-5 px-6 h-[calc(100vh-90px)] flex flex-col">
+    <div className="w-full max-w-7xl mx-auto mt-5 mb-10 px-6 h-[calc(100vh-90px)] flex flex-col">
       <AppBreadcrumb />
       <div className="flex-1 flex flex-col md:overflow-hidden bg-background border border-default-200 rounded-xl shadow-sm overflow-hidden relative">
         {/* Header */}

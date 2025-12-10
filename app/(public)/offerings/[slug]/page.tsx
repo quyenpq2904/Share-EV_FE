@@ -76,7 +76,7 @@ function OfferingDetailsPage() {
   const totalPrice = currentPercent * offeringData.pricePer1Percent;
 
   return (
-    <>
+    <div className="max-w-7xl mx-auto mt-5 mb-10 px-6">
       <AppBreadcrumb
         dynamicRoutes={{
           [slug]: offeringData.name,
@@ -289,7 +289,7 @@ function OfferingDetailsPage() {
           <Tab key="terms" title="Terms & Conditions" />
         </Tabs>
       </div>
-    </>
+    </div>
   );
 }
 
