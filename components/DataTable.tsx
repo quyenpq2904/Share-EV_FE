@@ -34,6 +34,7 @@ interface DataTableProps<T> {
   rowsPerPage?: number;
   onSelectionChange?: (keys: Selection) => void;
   initialSelectedKeys?: Selection;
+  selectionMode?: "single" | "multiple" | "none";
 }
 
 export default function DataTable<T extends { id: string | number }>({
@@ -47,6 +48,7 @@ export default function DataTable<T extends { id: string | number }>({
   isLoading = false,
   showPagination = true,
   rowsPerPage = 10,
+  selectionMode = "multiple",
   onSelectionChange,
   initialSelectedKeys = new Set([]),
 }: DataTableProps<T>) {
@@ -63,7 +65,7 @@ export default function DataTable<T extends { id: string | number }>({
 
     return (
       <div className="py-2 px-2 flex justify-between items-center border-t border-default-100 mt-2">
-        <span className="w-[30%] text-small text-default-400">
+        <span className="w-[30%] text-small text-default-500">
           Showing {data.length > 0 ? startItem : 0} to {endItem} of {totalItems}{" "}
           results
         </span>
@@ -115,7 +117,7 @@ export default function DataTable<T extends { id: string | number }>({
           thead: "[&>tr]:first:shadow-none",
         }}
         selectedKeys={selectedKeys}
-        selectionMode="multiple"
+        selectionMode={selectionMode}
         sortDescriptor={sortDescriptor}
         onSortChange={setSortDescriptor}
         onSelectionChange={handleSelectionChange}

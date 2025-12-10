@@ -20,6 +20,8 @@ enum UserStatus {
 
 enum UserRole {
   USER = "USER",
+  STAFF = "STAFF",
+  OPERATOR = "OPERATOR",
   ADMIN = "ADMIN",
 }
 

@@ -13,8 +13,13 @@ import { Icon } from "@iconify/react";
 import { usePathname } from "next/navigation";
 import { useCallback } from "react";
 import AppIcon from "./AppIcon";
+import { UserRole } from "@/types/User";
 
-const BASE_PATH = "/admin";
+const BASE_PATH: Record<Exclude<UserRole, UserRole.USER>, string> = {
+  [UserRole.STAFF]: "/staff",
+  [UserRole.OPERATOR]: "/operator",
+  [UserRole.ADMIN]: "/admin",
+};
 
 type NavItem = {
   name: string;
@@ -28,7 +33,7 @@ type SidebarSection = {
   items: NavItem[];
 };
 
-const sidebarConfig: SidebarSection[] = [
+const adminSidebarConfig: SidebarSection[] = [
   {
     title: "Menu",
     items: [
@@ -122,21 +127,87 @@ const sidebarConfig: SidebarSection[] = [
   },
 ];
 
-function AdminSidebar() {
+const staffSidebarConfig: SidebarSection[] = [
+  {
+    title: "Menu",
+    items: [
+      {
+        icon: "solar:widget-5-outline",
+        name: "Dashboard",
+        path: "",
+      },
+    ],
+  },
+  {
+    title: "Marketplace",
+    items: [
+      {
+        icon: "ri:car-line",
+        name: "Vehicle Approvals",
+        path: "vehicle-approvals",
+      },
+      {
+        icon: "hugeicons:contracts",
+        name: "Share Offers",
+        path: "share-offers",
+      },
+    ],
+  },
+];
+
+const operatorSidebarConfig: SidebarSection[] = [
+  {
+    title: "Menu",
+    items: [
+      {
+        icon: "solar:widget-5-outline",
+        name: "Dashboard",
+        path: "",
+      },
+      {
+        icon: "solar:calendar-linear",
+        name: "Calendar",
+        path: "calendar",
+      },
+      {
+        icon: "solar:user-circle-linear",
+        name: "User Profile",
+        path: "profile",
+      },
+    ],
+  },
+];
+
+const sidebarConfig: Record<
+  Exclude<UserRole, UserRole.USER>,
+  SidebarSection[]
+> = {
+  [UserRole.ADMIN]: adminSidebarConfig,
+  [UserRole.STAFF]: staffSidebarConfig,
+  [UserRole.OPERATOR]: operatorSidebarConfig,
+};
+
+function ManagementSidebar({
+  role,
+}: {
+  role: Exclude<UserRole, UserRole.USER>;
+}) {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const pathname = usePathname();
 
   const isFullSidebar = isExpanded || isHovered || isMobileOpen;
 
-  const getFullPath = useCallback((path?: string) => {
-    if (path === undefined) return "#";
-    return path ? `${BASE_PATH}/${path}` : BASE_PATH;
-  }, []);
+  const getFullPath = useCallback(
+    (path?: string) => {
+      return path ? `${BASE_PATH[role]}/${path}` : BASE_PATH[role];
+    },
+    [role]
+  );
 
   const isActive = useCallback(
     (path?: string) => {
       const fullPath = getFullPath(path);
-      if (fullPath === BASE_PATH) {
+      if (fullPath === getFullPath()) {
         return pathname === fullPath;
       }
       return pathname.startsWith(fullPath);
@@ -310,7 +381,7 @@ function AdminSidebar() {
           isFullSidebar ? "px-6 justify-start" : "justify-center px-0"
         }`}
       >
-        <Link href="/admin">
+        <Link href={BASE_PATH[role]}>
           <AppIcon size={40} />
           {isFullSidebar && (
             <p className="font-bold text-xl ml-2 text-foreground">Acme</p>
@@ -320,11 +391,11 @@ function AdminSidebar() {
 
       <ScrollShadow className="h-[calc(100vh-64px)] pb-10" hideScrollBar>
         <div className="py-6 px-3">
-          {sidebarConfig.map((section) => renderSection(section))}
+          {sidebarConfig[role].map((section) => renderSection(section))}
         </div>
       </ScrollShadow>
     </aside>
   );
 }
 
-export default AdminSidebar;
+export default ManagementSidebar;

@@ -5,7 +5,7 @@ import ManagementSidebar from "@/components/ManagementSidebar";
 import { useSidebar } from "@/contexts/SidebarContext";
 import { UserRole } from "@/types/User";
 
-function AdminLayout({ children }: { children: React.ReactNode }) {
+function OperatorLayout({ children }: { children: React.ReactNode }) {
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
 
   const mainContentMargin = isMobileOpen
@@ -16,7 +16,7 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen xl:flex">
-      <ManagementSidebar role={UserRole.ADMIN} />
+      <ManagementSidebar role={UserRole.OPERATOR} />
       <div
         className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin}`}
       >
@@ -28,4 +28,4 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-export default AdminLayout;
+export default OperatorLayout;

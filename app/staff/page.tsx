@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Button,
   Card,
@@ -20,11 +20,7 @@ import {
   useDisclosure,
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
-import StatsCard from "@/components/StatsCard"; // Giả sử bạn lưu component StatsCard ở đây
-
-// ============================================================================
-// 1. MOCK DATA
-// ============================================================================
+import StatsCard from "@/components/StatsCard";
 
 const pickups = [
   { id: 1, name: "Alex Johnson", car: "VF9 - ABC-123", time: "10:30 AM" },
