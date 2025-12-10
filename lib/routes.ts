@@ -5,7 +5,7 @@ export const routeNameMap: Record<string, string> = {
   users: "User Management",
   me: "My Account",
   garage: "My Garage",
-  offerings: "Marketplace",
+  offerings: "Offerings",
   settings: "Settings",
   profile: "Profile",
   "sign-in": "Login",

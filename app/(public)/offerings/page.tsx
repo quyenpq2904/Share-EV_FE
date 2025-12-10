@@ -271,59 +271,61 @@ function OfferingsPage() {
 
   return (
     <>
-      <AppBreadcrumb />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div className="hidden lg:block lg:col-span-3">
-          <FiltersSidebar />
-        </div>
+      <div className="max-w-7xl mx-auto mt-5 px-6">
+        <AppBreadcrumb />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="hidden lg:block lg:col-span-3">
+            <FiltersSidebar />
+          </div>
 
-        <div className="lg:col-span-9 flex flex-col gap-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <h1 className="text-3xl font-bold">Find Your EV Share</h1>
+          <div className="lg:col-span-9 flex flex-col gap-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <h1 className="text-3xl font-bold">Find Your EV Share</h1>
 
-            <div className="flex gap-3">
-              <div className="rounded-lg px-1 flex border border-default-100/5">
-                <Button isIconOnly>
-                  <Icon icon="solar:widget-2-bold" className="text-lg" />
-                </Button>
-                <Button isIconOnly variant="light">
-                  <Icon icon="solar:list-bold" className="text-lg" />
-                </Button>
+              <div className="flex gap-3">
+                <div className="rounded-lg px-1 flex border border-default-100/5">
+                  <Button isIconOnly>
+                    <Icon icon="solar:widget-2-bold" className="text-lg" />
+                  </Button>
+                  <Button isIconOnly variant="light">
+                    <Icon icon="solar:list-bold" className="text-lg" />
+                  </Button>
+                </div>
+
+                <Select
+                  className="w-[200px]"
+                  defaultSelectedKeys={["new"]}
+                  placeholder="Sort by"
+                  aria-label="Sort options"
+                  selectorIcon={<Icon icon="solar:alt-arrow-down-linear" />}
+                >
+                  <SelectItem key="new">Newly Listed</SelectItem>
+                  <SelectItem key="price_low">Price: Low to High</SelectItem>
+                  <SelectItem key="price_high">Price: High to Low</SelectItem>
+                </Select>
               </div>
-
-              <Select
-                className="w-[200px]"
-                defaultSelectedKeys={["new"]}
-                placeholder="Sort by"
-                aria-label="Sort options"
-                selectorIcon={<Icon icon="solar:alt-arrow-down-linear" />}
-              >
-                <SelectItem key="new">Newly Listed</SelectItem>
-                <SelectItem key="price_low">Price: Low to High</SelectItem>
-                <SelectItem key="price_high">Price: High to Low</SelectItem>
-              </Select>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {items.map((item) => (
-              <OfferingCard key={item.id} item={item} />
-            ))}
-          </div>
-
-          {pages > 1 && (
-            <div className="flex justify-center mt-8">
-              <Pagination
-                isCompact
-                showControls
-                showShadow
-                color="success"
-                page={page}
-                total={pages}
-                onChange={setPage}
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {items.map((item) => (
+                <OfferingCard key={item.id} item={item} />
+              ))}
             </div>
-          )}
+
+            {pages > 1 && (
+              <div className="flex justify-center mt-8">
+                <Pagination
+                  isCompact
+                  showControls
+                  showShadow
+                  color="success"
+                  page={page}
+                  total={pages}
+                  onChange={setPage}
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

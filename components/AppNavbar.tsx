@@ -22,17 +22,29 @@ import {
 import { Icon } from "@iconify/react";
 import React from "react";
 import ThemeChanger from "./ThemeChanger";
-import AppIcon from "./AppIcon";
+
 import { useAuthContext } from "@/contexts/AuthContext";
 import { usePathname } from "next/navigation";
 import NextLink from "next/link";
 
-const menuItems = [
+interface MenuItem {
+  name: string;
+  href: string;
+  icon?: string;
+  children?: {
+    name: string;
+    desc: string;
+    icon: string;
+    href: string;
+  }[];
+}
+
+const menuItems: MenuItem[] = [
   { name: "Home", href: "/" },
   { name: "Offerings", href: "/offerings" },
-  { name: "Customers", href: "/customers" },
+  { name: "Stations", href: "/stations" },
   { name: "About Us", href: "/about-us" },
-  { name: "Integrations", href: "/integrations" },
+  { name: "Pricing", href: "/pricing" },
 ];
 
 const AppNavbar = (props: NavbarProps) => {
@@ -41,7 +53,7 @@ const AppNavbar = (props: NavbarProps) => {
   const pathname = usePathname();
 
   const checkIsActive = (href: string) => {
-    if (href === "/") return pathname === "/";
+    if (href === "/" || href === "#") return pathname === "/";
     return pathname.startsWith(href);
   };
 
@@ -60,14 +72,60 @@ const AppNavbar = (props: NavbarProps) => {
     >
       <NavbarContent justify="start">
         <NavbarBrand as={NextLink} href="/" className="text-foreground gap-2">
-          <div className="bg-background rounded-full">
-            <AppIcon size={50} />
+          <div className="bg-success/10 p-1.5 rounded-xl">
+            <Icon
+              icon="solar:electric-refueling-bold"
+              className="text-success text-2xl"
+            />
           </div>
-          <span className="font-medium">ACME</span>
+          <span className="font-bold text-xl tracking-tight">SharedEV</span>
         </NavbarBrand>
 
         {menuItems.map((item) => {
           const isActive = checkIsActive(item.href);
+
+          if (item.children) {
+            return (
+              <Dropdown key={item.name}>
+                <NavbarItem>
+                  <DropdownTrigger>
+                    <Button
+                      disableRipple
+                      className="p-0 bg-transparent data-[hover=true]:bg-transparent text-medium"
+                      endContent={<Icon icon="solar:alt-arrow-down-linear" />}
+                      radius="sm"
+                      variant="light"
+                    >
+                      {item.name}
+                    </Button>
+                  </DropdownTrigger>
+                </NavbarItem>
+                <DropdownMenu
+                  aria-label={item.name}
+                  className="w-[340px]"
+                  itemClasses={{
+                    base: "gap-4",
+                  }}
+                >
+                  {item.children.map((child) => (
+                    <DropdownItem
+                      key={child.name}
+                      description={child.desc}
+                      startContent={
+                        <div className="p-2 bg-success/10 rounded-lg text-success">
+                          <Icon icon={child.icon} className="text-xl" />
+                        </div>
+                      }
+                      href={child.href}
+                    >
+                      {child.name}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
+            );
+          }
+
           return (
             <NavbarItem key={item.href} isActive={isActive}>
               <Link
@@ -108,28 +166,65 @@ const AppNavbar = (props: NavbarProps) => {
                   <p className="font-semibold">{profile.email}</p>
                 </DropdownItem>
 
-                <DropdownSection title="Manage Account">
-                  <DropdownItem key="profiles" href="/me">
-                    Profiles
+                <DropdownSection title="My Garage & Shares" showDivider>
+                  <DropdownItem
+                    key="garage"
+                    href="/me/garage"
+                    startContent={<Icon icon="solar:garage-bold" />}
+                  >
+                    My Garage
+                    <span className="text-tiny text-default-400 block">
+                      Vehicle Registration
+                    </span>
+                  </DropdownItem>
+                  <DropdownItem
+                    key="co-ownerships"
+                    href="/me/co-ownerships"
+                    startContent={
+                      <Icon icon="solar:users-group-rounded-bold" />
+                    }
+                  >
+                    My Co-ownerships
+                    <span className="text-tiny text-default-400 block">
+                      Contracts & Voting
+                    </span>
                   </DropdownItem>
                 </DropdownSection>
-                <DropdownSection title="Manage Garage">
-                  <DropdownItem key="garage" href="/me/garage">
-                    Garage
+
+                <DropdownSection title="Usage & Finance" showDivider>
+                  <DropdownItem
+                    key="bookings"
+                    href="/me/schedules"
+                    startContent={<Icon icon="solar:calendar-bold" />}
+                  >
+                    Bookings
+                    <span className="text-tiny text-default-400 block">
+                      Scheduling & History
+                    </span>
                   </DropdownItem>
-                  <DropdownItem key="listings" href="/me/listings">
-                    Listings
+                  <DropdownItem
+                    key="finance"
+                    href="/me/finance"
+                    startContent={<Icon icon="solar:wallet-money-bold" />}
+                  >
+                    Wallet
+                    <span className="text-tiny text-default-400 block">
+                      Costs & Settlements
+                    </span>
+                  </DropdownItem>
+                  <DropdownItem
+                    key="maintenance"
+                    href="/me/maintenance"
+                    startContent={<Icon icon="solar:clipboard-list-bold" />}
+                  >
+                    Maintenance
+                    <span className="text-tiny text-default-400 block">
+                      AI Reports & Alerts
+                    </span>
                   </DropdownItem>
                 </DropdownSection>
-                <DropdownSection title="Manage Transactions">
-                  <DropdownItem key="transactions" href="/me/transaction">
-                    Transactions
-                  </DropdownItem>
-                  <DropdownItem key="co-ownerships" href="/me/co-ownerships">
-                    Co-Ownerships
-                  </DropdownItem>
-                </DropdownSection>
-                <DropdownSection title="Settings">
+
+                <DropdownSection title="Account">
                   <DropdownItem key="settings" href="/me/settings">
                     Settings
                   </DropdownItem>
@@ -148,22 +243,21 @@ const AppNavbar = (props: NavbarProps) => {
               <Button
                 as={Link}
                 href="/sign-in"
-                className="text-md text-foreground"
+                className="text-md font-medium text-foreground"
                 radius="full"
                 variant="light"
               >
-                Login
+                Log in
               </Button>
               <Button
                 as={Link}
-                href="/sign-up"
-                className="bg-foreground text-md text-background font-medium"
-                color="secondary"
-                endContent={<Icon icon="solar:alt-arrow-right-linear" />}
+                href="/request-demo"
+                className="bg-gradient-to-r from-success to-primary text-md text-white font-medium shadow-lg shadow-success/20"
+                endContent={<Icon icon="solar:arrow-right-linear" />}
                 radius="full"
-                variant="flat"
+                variant="solid"
               >
-                Get Started
+                Request Demo
               </Button>
             </>
           )}
@@ -215,6 +309,32 @@ const AppNavbar = (props: NavbarProps) => {
         )}
 
         {menuItems.map((item, index) => {
+          if (item.children) {
+            return (
+              <div
+                key={`${item.name}-${index}`}
+                className="flex flex-col gap-2 mb-2"
+              >
+                <span className="text-default-500 text-sm font-medium px-2">
+                  {item.name}
+                </span>
+                {item.children.map((child) => (
+                  <NavbarMenuItem key={child.name}>
+                    <Link
+                      as={NextLink}
+                      className="w-full pl-4 text-foreground"
+                      href={child.href}
+                      size="md"
+                    >
+                      {child.name}
+                    </Link>
+                  </NavbarMenuItem>
+                ))}
+                <Divider className="opacity-50 my-1" />
+              </div>
+            );
+          }
+
           const isActive = checkIsActive(item.href);
           return (
             <NavbarMenuItem key={`${item.href}-${index}`} isActive={isActive}>

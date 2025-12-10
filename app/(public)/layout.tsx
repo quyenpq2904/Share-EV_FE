@@ -1,4 +1,5 @@
 import AppNavbar from "@/components/AppNavbar";
+import AppFooter from "@/components/AppFooter";
 
 export default function AuthLayout({
   children,
@@ -8,7 +9,8 @@ export default function AuthLayout({
   return (
     <>
       <AppNavbar />
-      <main className="max-w-7xl mx-auto mt-5">{children}</main>
+      <main>{children}</main>
+      <AppFooter />
     </>
   );
 }
