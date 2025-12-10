@@ -29,7 +29,6 @@ type Staff = {
 
 const columns: Column[] = [
   { name: "STAFF INFO", uid: "name", sortable: true, align: "start" },
-  { name: "ROLE", uid: "role", sortable: true, align: "start" },
   { name: "ASSIGNED STATION", uid: "station", sortable: true, align: "start" },
   { name: "JOIN DATE", uid: "joinDate", sortable: true, align: "start" },
   { name: "STATUS", uid: "status", sortable: true, align: "start" },
@@ -154,17 +153,6 @@ export default function StaffManagement() {
             {user.email}
           </User>
         );
-      case "role":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm text-default-900 capitalize">
-              {cellValue}
-            </p>
-            <p className="text-bold text-xs text-default-500 capitalize">
-              Employee
-            </p>
-          </div>
-        );
       case "station":
         return (
           <div className="flex items-center gap-2 text-default-600">
@@ -234,7 +222,7 @@ export default function StaffManagement() {
           <div>
             <h2 className="text-2xl font-bold ">Staff Management</h2>
             <p className="text-sm text-default-600">
-              Manage all station employees and their roles
+              Manage all station employees
             </p>
           </div>
           <Button color="primary" startContent={<Icon icon="lucide:plus" />}>

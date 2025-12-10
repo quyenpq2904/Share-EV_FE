@@ -269,7 +269,7 @@ function AdminPage() {
     <div className="">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-8 flex flex-col gap-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <StatsCard
               title="Customers"
               value="3,782"
@@ -280,9 +280,18 @@ function AdminPage() {
               iconColor="text-primary"
             />
             <StatsCard
-              title="Orders"
+              title="Vehicles"
+              value="3,782"
+              icon="ri:car-line"
+              trend="+ 11.01%"
+              trendType="up"
+              iconBg="bg-success-50"
+              iconColor="text-success"
+            />
+            <StatsCard
+              title="Offers"
               value="5,359"
-              icon="solar:box-linear"
+              icon="hugeicons:contracts"
               trend="- 9.05%"
               trendType="down"
               iconBg="bg-danger-50"

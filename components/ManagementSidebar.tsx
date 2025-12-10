@@ -43,64 +43,12 @@ const adminSidebarConfig: SidebarSection[] = [
         path: "",
       },
       {
-        icon: "solar:calendar-linear",
-        name: "Calendar",
-        path: "calendar",
-      },
-      {
-        icon: "solar:user-circle-linear",
-        name: "User Profile",
-        path: "profile",
-      },
-      {
-        name: "Forms",
-        icon: "solar:checklist-minimalistic-linear",
-        subItems: [{ name: "Form Elements", path: "form-elements" }],
-      },
-      {
-        name: "Tables",
-        icon: "solar:server-square-linear",
-        subItems: [{ name: "Basic Tables", path: "basic-tables" }],
-      },
-      {
-        name: "Pages",
-        icon: "solar:file-text-linear",
+        icon: "carbon:operations-record",
+        name: "Operations",
         subItems: [
-          { name: "Blank Page", path: "blank" },
-          { name: "404 Error", path: "error-404" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Others",
-    items: [
-      {
-        icon: "solar:chart-2-linear",
-        name: "Charts",
-        subItems: [
-          { name: "Line Chart", path: "line-chart" },
-          { name: "Bar Chart", path: "bar-chart" },
-        ],
-      },
-      {
-        icon: "solar:box-linear",
-        name: "UI Elements",
-        subItems: [
-          { name: "Alerts", path: "alerts" },
-          { name: "Avatar", path: "avatars" },
-          { name: "Badge", path: "badge" },
-          { name: "Buttons", path: "buttons" },
-          { name: "Images", path: "images" },
-          { name: "Videos", path: "videos" },
-        ],
-      },
-      {
-        icon: "solar:login-2-linear",
-        name: "Authentication",
-        subItems: [
-          { name: "Sign In", path: "signin" },
-          { name: "Sign Up", path: "signup" },
+          { name: "Stations", path: "stations" },
+          { name: "Staffs", path: "staffs" },
+          { name: "Fees", path: "fees" },
         ],
       },
     ],
@@ -108,16 +56,6 @@ const adminSidebarConfig: SidebarSection[] = [
   {
     title: "Support",
     items: [
-      {
-        icon: "solar:help-linear",
-        name: "Help Center",
-        path: "help-center",
-      },
-      {
-        icon: "solar:chat-round-dots-linear",
-        name: "Messages",
-        path: "messages",
-      },
       {
         icon: "solar:ticket-linear",
         name: "Tickets",
@@ -166,6 +104,11 @@ const staffSidebarConfig: SidebarSection[] = [
         name: "Maintainance",
         path: "maintainance",
       },
+      {
+        icon: "solar:ticket-linear",
+        name: "Tickets",
+        path: "tickets",
+      },
     ],
   },
 ];
@@ -179,15 +122,20 @@ const operatorSidebarConfig: SidebarSection[] = [
         name: "Dashboard",
         path: "",
       },
+    ],
+  },
+  {
+    title: "Stations",
+    items: [
       {
-        icon: "solar:calendar-linear",
-        name: "Calendar",
-        path: "calendar",
+        icon: "solar:home-2-linear",
+        name: "Stations",
+        path: "stations",
       },
       {
-        icon: "solar:user-circle-linear",
-        name: "User Profile",
-        path: "profile",
+        icon: "solar:user-linear",
+        name: "Staffs",
+        path: "staffs",
       },
     ],
   },
