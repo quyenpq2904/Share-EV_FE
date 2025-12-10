@@ -11,11 +11,15 @@ import { Icon } from "@iconify/react";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema, LoginSchema } from "@/lib/schemas/auth";
 
 function SignInPage() {
   const [isVisible, setIsVisible] = React.useState(false);
   const { login } = useAuthContext();
-  const formMethods = useForm<ILoginRequest>();
+  const formMethods = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema),
+  });
   const router = useRouter();
 
   const toggleVisibility = () => setIsVisible(!isVisible);
@@ -24,7 +28,7 @@ function SignInPage() {
     mutationFn: (body: ILoginRequest) => authApi.login(body),
   });
 
-  const onSubmit: SubmitHandler<ILoginRequest> = (data) => {
+  const onSubmit: SubmitHandler<LoginSchema> = (data) => {
     loginMutaion.mutate(data, {
       onSuccess: (response) => {
         const { accessToken, refreshToken } = response.data;
@@ -63,7 +67,7 @@ function SignInPage() {
           validationBehavior="native"
           onSubmit={formMethods.handleSubmit(onSubmit)}
         >
-          <InputControl<ILoginRequest>
+          <InputControl<LoginSchema>
             register={formMethods.register}
             isRequired
             label="Email Address"
@@ -72,7 +76,7 @@ function SignInPage() {
             type="email"
             variant="bordered"
           />
-          <InputControl<ILoginRequest>
+          <InputControl<LoginSchema>
             register={formMethods.register}
             isRequired
             endContent={
