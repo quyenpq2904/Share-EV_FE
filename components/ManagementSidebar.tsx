@@ -153,6 +153,21 @@ const staffSidebarConfig: SidebarSection[] = [
       },
     ],
   },
+  {
+    title: "Operations",
+    items: [
+      {
+        icon: "qlementine-icons:swap-16",
+        name: "Handovers",
+        path: "handovers",
+      },
+      {
+        icon: "akar-icons:gear",
+        name: "Maintainance",
+        path: "maintainance",
+      },
+    ],
+  },
 ];
 
 const operatorSidebarConfig: SidebarSection[] = [
