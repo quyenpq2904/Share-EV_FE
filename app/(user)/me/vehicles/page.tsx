@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { formatCurrency } from "@/lib/utils/currency";
 import { IVehicle } from "@/types/Vehicle";
 import {
@@ -13,6 +14,7 @@ import {
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
+import AddVehicleModal from "./AddVehicleModal";
 
 export const garageVehicles: IVehicle[] = [
   {
@@ -81,10 +83,7 @@ const StatusBadge = ({ status }: { status: IVehicle["status"] }) => {
   );
 };
 
-import React, { useState } from "react";
-import AddVehicleModal from "./AddVehicleModal";
-
-function MyGaragePage() {
+function VehiclesPage() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   return (
@@ -120,7 +119,7 @@ function MyGaragePage() {
         onOpenChange={setIsAddModalOpen}
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {garageVehicles.map((vehicle) => (
           <Card key={vehicle.id}>
             <div className="p-4 pb-0">
@@ -224,4 +223,4 @@ function MyGaragePage() {
   );
 }
 
-export default MyGaragePage;
+export default VehiclesPage;

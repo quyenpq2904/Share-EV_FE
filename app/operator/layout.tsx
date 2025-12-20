@@ -1,9 +1,37 @@
 "use client";
 
 import AdminHeader from "@/components/AdminHeader";
-import ManagementSidebar from "@/components/ManagementSidebar";
+import ManagementSidebar, { SidebarSection } from "@/components/AppSidebar";
 import { useSidebar } from "@/contexts/SidebarContext";
 import { UserRole } from "@/types/User";
+
+const operatorSidebarConfig: SidebarSection[] = [
+  {
+    title: "Menu",
+    items: [
+      {
+        icon: "solar:widget-5-outline",
+        name: "Dashboard",
+        path: "",
+      },
+    ],
+  },
+  {
+    title: "Stations",
+    items: [
+      {
+        icon: "solar:home-2-linear",
+        name: "Stations",
+        path: "stations",
+      },
+      {
+        icon: "solar:user-linear",
+        name: "Staffs",
+        path: "staffs",
+      },
+    ],
+  },
+];
 
 function OperatorLayout({ children }: { children: React.ReactNode }) {
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
@@ -16,7 +44,10 @@ function OperatorLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen xl:flex">
-      <ManagementSidebar role={UserRole.OPERATOR} />
+      <ManagementSidebar
+        sidebarConfig={operatorSidebarConfig}
+        basePath="/operator"
+      />
       <div
         className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin}`}
       >

@@ -1,9 +1,45 @@
 "use client";
 
 import AdminHeader from "@/components/AdminHeader";
-import ManagementSidebar from "@/components/ManagementSidebar";
+import ManagementSidebar, { SidebarSection } from "@/components/AppSidebar";
 import { useSidebar } from "@/contexts/SidebarContext";
-import { UserRole } from "@/types/User";
+
+const adminSidebarConfig: SidebarSection[] = [
+  {
+    title: "Menu",
+    items: [
+      {
+        icon: "solar:widget-5-outline",
+        name: "Dashboard",
+        path: "",
+      },
+      {
+        icon: "ri:car-line",
+        name: "Vehicles",
+        path: "vehicles",
+      },
+      {
+        icon: "carbon:operations-record",
+        name: "Operations",
+        subItems: [
+          { name: "Stations", path: "stations" },
+          { name: "Staffs", path: "staffs" },
+          { name: "Fees", path: "fees" },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Support",
+    items: [
+      {
+        icon: "solar:ticket-linear",
+        name: "Tickets",
+        path: "tickets",
+      },
+    ],
+  },
+];
 
 function AdminLayout({ children }: { children: React.ReactNode }) {
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
@@ -16,7 +52,7 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen xl:flex">
-      <ManagementSidebar role={UserRole.ADMIN} />
+      <ManagementSidebar sidebarConfig={adminSidebarConfig} basePath="/admin" />
       <div
         className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin}`}
       >

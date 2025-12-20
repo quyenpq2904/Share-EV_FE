@@ -159,7 +159,7 @@ const CountdownTimer = () => {
 // 4. MAIN COMPONENT
 // ============================================================================
 
-function SchedulesPage() {
+function SchedulePage() {
   // State Calendar
   const [currentDate, setCurrentDate] = useState(new Date());
   const today = new Date();
@@ -524,4 +524,4 @@ function SchedulesPage() {
   );
 }
 
-export default SchedulesPage;
+export default SchedulePage;

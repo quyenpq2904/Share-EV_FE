@@ -1,9 +1,56 @@
 "use client";
 
 import AdminHeader from "@/components/AdminHeader";
-import ManagementSidebar from "@/components/ManagementSidebar";
+import ManagementSidebar, { SidebarSection } from "@/components/AppSidebar";
 import { useSidebar } from "@/contexts/SidebarContext";
-import { UserRole } from "@/types/User";
+
+const staffSidebarConfig: SidebarSection[] = [
+  {
+    title: "Menu",
+    items: [
+      {
+        icon: "solar:widget-5-outline",
+        name: "Dashboard",
+        path: "",
+      },
+    ],
+  },
+  {
+    title: "Marketplace",
+    items: [
+      {
+        icon: "ri:car-line",
+        name: "Vehicle Approvals",
+        path: "vehicle-approvals",
+      },
+      {
+        icon: "hugeicons:contracts",
+        name: "Share Offers",
+        path: "share-offers",
+      },
+    ],
+  },
+  {
+    title: "Operations",
+    items: [
+      {
+        icon: "qlementine-icons:swap-16",
+        name: "Handovers",
+        path: "handovers",
+      },
+      {
+        icon: "akar-icons:gear",
+        name: "Maintainance",
+        path: "maintainance",
+      },
+      {
+        icon: "solar:ticket-linear",
+        name: "Tickets",
+        path: "tickets",
+      },
+    ],
+  },
+];
 
 function StaffLayout({ children }: { children: React.ReactNode }) {
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
@@ -16,7 +63,7 @@ function StaffLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen xl:flex">
-      <ManagementSidebar role={UserRole.STAFF} />
+      <ManagementSidebar sidebarConfig={staffSidebarConfig} basePath="/staff" />
       <div
         className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin}`}
       >
